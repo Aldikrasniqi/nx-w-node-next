@@ -1,0 +1,61 @@
+{
+  "name": "exp-monorepo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/exp-monorepo/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/exp-monorepo",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/exp-monorepo/src/main.ts",
+        "tsConfig": "apps/exp-monorepo/tsconfig.app.json",
+        "assets": ["apps/exp-monorepo/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "exp-monorepo:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "exp-monorepo:build:development"
+        },
+        "production": {
+          "buildTarget": "exp-monorepo:build:production"
+        }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/exp-monorepo/Dockerfile . -t exp-monorepo"
+    }
+  }
+}
