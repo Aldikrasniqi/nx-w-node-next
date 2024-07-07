@@ -1,0 +1,9 @@
+{
+  "name": "next-pokemon-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/next-pokemon-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["next-pokemon"],
+  "// targets": "to see all targets run: nx show project next-pokemon-e2e --web",
+  "targets": {}
+}
