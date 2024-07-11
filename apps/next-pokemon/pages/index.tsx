@@ -15,7 +15,7 @@ export function Index({
   const [pokemon, setPokemon] = useState<Pokemon[]>(initialPokemon);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/search?q=${escape(search)}`)
+    fetch(`http://localhost:8000/search?q=${(search)}`)
       .then((resp) => resp.json())
       .then((data) => setPokemon(data));
   }, [search]);
@@ -43,7 +43,7 @@ export async function getServerSideProps(context: any) {
   let pokemon = [];
   if (context.query.q) {
     const res = await fetch(
-      `http://localhost:8000/search?q=${escape(context.query.q)}`
+      `http://localhost:8000/search?q=${(context.query.q)}`
     );
     pokemon = await res.json();
   }
