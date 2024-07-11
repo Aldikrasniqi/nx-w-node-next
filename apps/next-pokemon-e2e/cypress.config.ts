@@ -9,6 +9,6 @@ export default defineConfig({
       webServerCommands: { default: 'nx run next-pokemon:start' },
       ciWebServerCommand: 'nx run next-pokemon:serve-static',
     }),
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:8000',
   },
 });
